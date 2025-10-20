@@ -1,9 +1,11 @@
-import sqlite3
+import sqlite3  # Usamos esta librería para trabajar con la base de datos
 
+# Esta función crea la base de datos y las tablas si no existen
 def init_database():
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
+    conn = sqlite3.connect('database.db')  # Conectamos (o creamos) la base de datos
+    c = conn.cursor()  # Preparamos para ejecutar comandos SQL
     
+    # Creamos la tabla de inventario si no existe
     c.execute('''
         CREATE TABLE IF NOT EXISTS inventario (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,6 +17,7 @@ def init_database():
         )
     ''')
 
+    # Creamos la tabla de ventas si no existe
     c.execute('''
         CREATE TABLE IF NOT EXISTS ventas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,9 +29,10 @@ def init_database():
         )
     ''')
 
-    conn.commit()
-    conn.close()
+    conn.commit()  # Guardamos los cambios
+    conn.close()   # Cerramos la conexión con la base de datos
 
+# Si ejecutamos este archivo directamente, inicializamos la base de datos
 if __name__ == "__main__":
     init_database()
     print("Base de datos inicializada correctamente.")

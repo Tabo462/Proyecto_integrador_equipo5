@@ -1,83 +1,99 @@
-import sqlite3
-from tkinter import *
+import sqlite3  # Para conectar con la base de datos
+from tkinter import *  # Para crear la interfaz gráfica
 import tkinter as tk
-from tkinter import ttk, messagebox
-    
+from tkinter import ttk, messagebox  # Widgets más avanzados y mensajes emergentes
+
+# Esta clase maneja toda la ventana del inventario
 class Inventario(tk.Frame):
-    db_name = "database.db"
+    db_name = "database.db"  # Nombre del archivo de la base de datos
 
     def __init__(self, padre):
         super().__init__(padre)
-        self.pack()
-        self.conn = sqlite3.connect(self.db_name)
-        self.cursor = self.conn.cursor()
-        self.widgets()
-    
+        self.pack()  # Coloca el frame en la ventana
+        self.conn = sqlite3.connect(self.db_name)  # Abre conexión con la base de datos
+        self.cursor = self.conn.cursor()  # Prepara para ejecutar comandos SQL
+        self.widgets()  # Llama a la función que arma toda la interfaz
+
+    # Aquí se arma toda la interfaz visual
     def widgets(self):
-        
+
+        # Encabezado de la ventana
         frame1 = tk.Frame(self, bg="#dddddd", highlightbackground="gray", highlightthickness=1)
         frame1.pack()
         frame1.place(x=0, y=0, width=1100, height=100)
 
+        # Título grande
         titulo = tk.Label(self, text="INVENTARIOS", bg="#dddddd", font="sans 30 bold", anchor="center")
         titulo.pack()
-        titulo.place(x=5,y=0, width=1090, height=90)    
+        titulo.place(x=5, y=0, width=1090, height=90)
 
+        # Área principal donde van los formularios y la tabla
         frame2 = tk.Frame(self, bg="#C6D9E3", highlightbackground="gray", highlightthickness=1)
         frame2.place(x=0, y=100, width=1100, height=550)
 
+        # Sección para ingresar datos de productos
         labelframe = LabelFrame(frame2, text="Productos", font="sans 22 bold", bg="#C6D9E3")
         labelframe.place(x=20, y=30, width=400, height=500)
 
-        lblnombre = Label(labelframe, text= "Nombre: ", font="sans 14 bold", bg= "#C6D9E3")
+        # Campo para el nombre del producto
+        lblnombre = Label(labelframe, text="Nombre: ", font="sans 14 bold", bg="#C6D9E3")
         lblnombre.place(x=10, y=20)
         self.nombre = ttk.Entry(labelframe, font="sans 14 bold")
         self.nombre.place(x=140, y=20, width=240, height=40)
-        
-        lblproveedor = Label(labelframe, text="Proovedor: ",font="sans 14 bold", bg= "#C6D9E3")
+
+        # Campo para el proveedor
+        lblproveedor = Label(labelframe, text="Proovedor: ", font="sans 14 bold", bg="#C6D9E3")
         lblproveedor.place(x=10, y=80)
         self.proveedor = ttk.Entry(labelframe, font="sans 14 bold")
         self.proveedor.place(x=140, y=80, width=240, height=40)
-        
-        lblprecio = Label(labelframe, text="Precio: ",font="sans 14 bold", bg= "#C6D9E3")
+
+        # Campo para el precio
+        lblprecio = Label(labelframe, text="Precio: ", font="sans 14 bold", bg="#C6D9E3")
         lblprecio.place(x=10, y=140)
         self.precio = ttk.Entry(labelframe, font="sans 14 bold")
         self.precio.place(x=140, y=140, width=240, height=40)
-        
-        lblcosto = Label(labelframe, text="Costo: ",font="sans 14 bold", bg= "#C6D9E3")
+
+        # Campo para el costo
+        lblcosto = Label(labelframe, text="Costo: ", font="sans 14 bold", bg="#C6D9E3")
         lblcosto.place(x=10, y=200)
         self.costo = ttk.Entry(labelframe, font="sans 14 bold")
         self.costo.place(x=140, y=200, width=240, height=40)
-        
-        lblstock = Label(labelframe, text="Stock: ",font="sans 14 bold", bg= "#C6D9E3")
+
+        # Campo para el stock disponible
+        lblstock = Label(labelframe, text="Stock: ", font="sans 14 bold", bg="#C6D9E3")
         lblstock.place(x=10, y=260)
         self.stock = ttk.Entry(labelframe, font="sans 14 bold")
         self.stock.place(x=140, y=260, width=240, height=40)
 
+        # Botón para agregar un nuevo producto
         boton_agregar = tk.Button(labelframe, text="Ingresar", font="sans 14 bold", bg="#dddddd", command=self.registrar)
         boton_agregar.place(x=80, y=340, width=240, height=40)
 
+        # Botón para editar un producto existente
         boton_editar = tk.Button(labelframe, text="Editar", font="sans 14 bold", bg="#dddddd", command=self.editar_producto)
         boton_editar.place(x=80, y=400, width=240, height=40)
-        
-        # Tabla (aqui empieza vid 6 min 26:36)
-        treFrame = Frame (frame2, bg = "white")
+
+        # Área donde se muestra la tabla con los productos
+        treFrame = Frame(frame2, bg="white")
         treFrame.place(x=440, y=50, width=620, height=400)
 
-        # barra de scroll vertical
+        # Barras para poder hacer scroll en la tabla
         scrol_y = ttk.Scrollbar(treFrame)
         scrol_y.pack(side=RIGHT, fill=Y)
 
         scrol_x = ttk.Scrollbar(treFrame, orient=HORIZONTAL)
         scrol_x.pack(side=BOTTOM, fill=X)
 
+        # Aquí se crea la tabla con los encabezados
         self.tre = ttk.Treeview(treFrame, yscrollcommand=scrol_y.set, xscrollcommand=scrol_x.set, height=40,
-                        columns=("ID", "PRODUCTO", "PROVEEDOR", "PRECIO", "COSTO", "STOCK"), show="headings")
+                                columns=("ID", "PRODUCTO", "PROVEEDOR", "PRECIO", "COSTO", "STOCK"), show="headings")
         self.tre.pack(expand=True, fill=BOTH)
 
+        # Conectamos las barras de scroll con la tabla
         scrol_y.config(command=self.tre.yview)
         scrol_x.config(command=self.tre.xview)
 
+        # Nombres de las columnas
         self.tre.heading("ID", text="Id")
         self.tre.heading("PRODUCTO", text="Producto")
         self.tre.heading("PROVEEDOR", text="Proveedor")
@@ -85,6 +101,7 @@ class Inventario(tk.Frame):
         self.tre.heading("COSTO", text="Costo")
         self.tre.heading("STOCK", text="Stock")
 
+        # Ajustamos el ancho y alineación de cada columna
         self.tre.column("ID", width=70, anchor="center")
         self.tre.column("PRODUCTO", width=100, anchor="center")
         self.tre.column("PROVEEDOR", width=100, anchor="center")
@@ -92,12 +109,14 @@ class Inventario(tk.Frame):
         self.tre.column("COSTO", width=100, anchor="center")
         self.tre.column("STOCK", width=70, anchor="center")
 
-        self.mostrar()
+        self.mostrar()  # Llama a la función que carga los datos en la tabla
 
+        # Botón para actualizar los datos que se ven en la tabla
         btn_actualizar = Button(frame2, text="Actualizar Inventario", font="sans 14 bold", command=self.actualizar_inventario)
         btn_actualizar.place(x=440, y=480, width=260, height=50)
 
     def eje_consulta(self, consulta, parametros = ()):
+        # Abre la base, hace la consulta y cierra sola; tipo práctico y sin drama
         with sqlite3.connect(self.db_name) as conn:
             cursor = conn.cursor()
             result = cursor.execute(consulta, parametros)
@@ -105,6 +124,7 @@ class Inventario(tk.Frame):
         return result
 
     def validacion(self, nombre, prov, precio, costo, stock):
+        # Revisa rápido si llenaste todo y si los números tienen sentido
         if not (nombre and prov and precio and costo and stock):
             return False
         try:
@@ -116,6 +136,7 @@ class Inventario(tk.Frame):
         return True
 
     def mostrar(self):
+        # Toma todo el inventario y lo pone en la tabla bonito y legible
         consulta = "SELECT * FROM inventario ORDER BY id DESC"
         result = self.eje_consulta(consulta)
         for elem in result:
@@ -128,6 +149,7 @@ class Inventario(tk.Frame):
             self.tre.insert("", 0, text=elem[0], values=(elem[0], elem[1], elem[2], precio_mxn, costo_mxn, elem[5]))
 
     def actualizar_inventario(self):
+        # Limpia la tabla y vuelve a cargar todo; confirma con un mensajito
         for item in self.tre.get_children():
             self.tre.delete(item)
 
@@ -135,8 +157,8 @@ class Inventario(tk.Frame):
 
         messagebox.showinfo("Actualizacion", "El inventario ha sido actualizado correctamente")
 
-
     def registrar(self):
+        # Agarra lo que pusiste en los campos y lo guarda en la base si todo está bien
         result = self.tre.get_children()
         for i in result:
             self.tre.delete(i)
@@ -163,6 +185,7 @@ class Inventario(tk.Frame):
             self.mostrar()
 
     def editar_producto(self):
+        # Abre una ventana para editar el producto seleccionado y guarda los cambios
         seleccion = self.tre.selection()
         if not seleccion:
             messagebox.showwarning("Editar producto", "Seleccione un producto para editar.")
@@ -174,39 +197,40 @@ class Inventario(tk.Frame):
         ventana_editar = Toplevel(self)
         ventana_editar.title("Editar producto")
         ventana_editar.geometry("400x400")
-        ventana_editar.config(bg="#C6D9E3")
+        ventana_editar.config(bg="#EFEDDB")
 
-        lbl_nombre = Label(ventana_editar, text="Nombre:", font="sans 14 bold", bg="#C6D9E3")
+        lbl_nombre = Label(ventana_editar, text="Nombre:", font="sans 14 bold", bg="#EFEDDB")
         lbl_nombre.grid(row=0, column=0, padx=10, pady=10)
         entry_nombre = Entry(ventana_editar, font="sans 14 bold")
         entry_nombre.grid(row=0, column=1, padx=10, pady=10)
         entry_nombre.insert(0, item_values[1])
 
-        lbl_proveedor = Label(ventana_editar, text="Proveedor:", font="sans 14 bold", bg="#C6D9E3")
+        lbl_proveedor = Label(ventana_editar, text="Proveedor:", font="sans 14 bold", bg="#EFEDDB")
         lbl_proveedor.grid(row=1, column=0, padx=10, pady=10)
         entry_proveedor = Entry(ventana_editar, font="sans 14 bold")
         entry_proveedor.grid(row=1, column=1, padx=10, pady=10)
         entry_proveedor.insert(0, item_values[2])
 
-        lbl_precio = Label(ventana_editar, text="Precio:", font="sans 14 bold", bg="#C6D9E3")
+        lbl_precio = Label(ventana_editar, text="Precio:", font="sans 14 bold", bg="#EFEDDB")
         lbl_precio.grid(row=2, column=0, padx=10, pady=10)
         entry_precio = Entry(ventana_editar, font="sans 14 bold")
         entry_precio.grid(row=2, column=1, padx=10, pady=10)
         entry_precio.insert(0, item_values[3].split()[0].replace(",", ""))
 
-        lbl_costo = Label(ventana_editar, text="Costo:", font="sans 14 bold", bg="#C6D9E3")
+        lbl_costo = Label(ventana_editar, text="Costo:", font="sans 14 bold", bg="#EFEDDB")
         lbl_costo.grid(row=3, column=0, padx=10, pady=10)
         entry_costo = Entry(ventana_editar, font="sans 14 bold")
         entry_costo.grid(row=3, column=1, padx=10, pady=10)
         entry_costo.insert(0, item_values[4].split()[0].replace(",", ""))
 
-        lbl_stock = Label(ventana_editar, text="Stock:", font="sans 14 bold", bg="#C6D9E3")
+        lbl_stock = Label(ventana_editar, text="Stock:", font="sans 14 bold", bg="#FBEDC2")
         lbl_stock.grid(row=4, column=0, padx=10, pady=10)
         entry_stock = Entry(ventana_editar, font="sans 14 bold")
         entry_stock.grid(row=4, column=1, padx=10, pady=10)
         entry_stock.insert(0, item_values[5])
 
         def guardar_cambios():
+            # Toma lo nuevo que escribiste, verifica y actualiza la base
             nombre = entry_nombre.get()
             proveedor = entry_proveedor.get()
             precio = entry_precio.get()
@@ -216,14 +240,14 @@ class Inventario(tk.Frame):
             if not (nombre and proveedor and precio and costo and stock):
                 messagebox.showwarning("Guardar cambios", "Rellene todos los campos.")
                 return
-            
+
             try:
                 precio = float(precio.replace(",", ""))
                 costo = float(costo.replace(",", ""))
             except ValueError:
                 messagebox.showwarning("Guardar cambios", "Ingrese valores numericos validos para precio y costo.")
                 return
-            
+
             consulta = "UPDATE inventario SET nombre=?, proveedor=?, precio=?, costo=?, stock=? WHERE id=?"
             parametros = (nombre, proveedor, precio, costo, stock, item_id)
             self.eje_consulta(consulta, parametros)
@@ -234,5 +258,3 @@ class Inventario(tk.Frame):
 
         btn_guardar = Button(ventana_editar, text="Guardar cambios", font="sans 14 bold", command=guardar_cambios)
         btn_guardar.place(x=80, y=250, width=240, height=40)
-
-
