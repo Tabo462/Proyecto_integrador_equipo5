@@ -14,48 +14,48 @@ class Ventas(tk.Frame):
 
     # Arma todos los widgets de la pantalla de ventas
     def widgets(self):
-        frame1 = tk.Frame(self, bg="#dddddd", highlightbackground="gray", highlightthickness=1)
+        frame1 = tk.Frame(self, bg="#DE2924", highlightbackground="gray", highlightthickness=1)
         frame1.pack()
         frame1.place(x=0, y=0, width=1100, height=100)
 
-        titulo = tk.Label(self, text="VENTAS", bg="#dddddd", font="sans 30 bold", anchor="center")
+        titulo = tk.Label(self, text="VENTAS", bg="#DE2924", font="sans 30 bold", anchor="center")
         titulo.pack()
         titulo.place(x=5, y=0, width=1090, height=90)
 
-        frame2 = tk.Frame(self, bg="#C6D9E3", highlightbackground="gray", highlightthickness=1)
+        frame2 = tk.Frame(self, bg="#FDC32F", highlightbackground="gray", highlightthickness=1)
         frame2.place(x=0, y=100, width=1100, height=550)
 
-        lblframe = LabelFrame(frame2, text="Informacíon de la venta", bg="#C6D9E3", font="sans 16 bold")
+        lblframe = LabelFrame(frame2, text="Informacíon de la venta", bg="#FDC32F", font="sans 16 bold")
         lblframe.place(x=10, y=10, width=1060, height=80)
 
-        label_numero_factura = tk.Label(lblframe, text="Número de \nfactura", bg="#C6D9E3", font="sans 12 bold")
+        label_numero_factura = tk.Label(lblframe, text="Número de \nfactura", bg="#FDC32F", font="sans 12 bold")
         label_numero_factura.place(x=10, y=5)
         self.numero_factura = tk.StringVar()
 
         self.entry_numero_factura = ttk.Entry(lblframe, textvariable=self.numero_factura, state="readonly", font="sans 12 bold")
         self.entry_numero_factura.place(x=100, y=5, width=80)
 
-        label_nombre = tk.Label(lblframe, text="Productos: ", bg="#C6D9E3", font="sans 12 bold")
+        label_nombre = tk.Label(lblframe, text="Productos: ", bg="#FDC32F", font="sans 12 bold")
         label_nombre.place(x=200, y=12)
         self.entry_nombre = ttk.Combobox(lblframe, font='sans 12 bold', state="readonly")
         self.entry_nombre.place(x=280, y=10, width=180)
 
         self.cargar_productos()
 
-        label_valor = tk.Label(lblframe, text="Precio:", bg="#C6D9E3", font="sans 12 bold")
+        label_valor = tk.Label(lblframe, text="Precio:", bg="#FDC32F", font="sans 12 bold")
         label_valor.place(x=470, y=12)
         self.entry_valor = ttk.Entry(lblframe, font="sans 12 bold", state="readonly")
         self.entry_valor.place(x=540, y=10, width=180)
 
         self.entry_nombre.bind("<<ComboboxSelected>>", self.actualizar_precio)
 
-        label_cantidad = tk.Label(lblframe, text="Cantidad:", bg="#C6D9E3", font="sans 12 bold")
+        label_cantidad = tk.Label(lblframe, text="Cantidad:", bg="#FDC32F", font="sans 12 bold")
         label_cantidad.place(x=730, y=12)
 
         self.entry_cantidad = ttk.Entry(lblframe, font="sans 12 bold")
         self.entry_cantidad.place(x=820, y=10)
 
-        treFrame = tk.Frame(frame2, bg="#C6D9E3")
+        treFrame = tk.Frame(frame2, bg="#FDC32F")
         treFrame.place(x=150, y=120, width=800, height=200)
 
         scrol_y = ttk.Scrollbar(treFrame, orient=VERTICAL)
@@ -80,19 +80,19 @@ class Ventas(tk.Frame):
 
         self.tree.pack(expand=True, fill=BOTH)
 
-        self.label_suma_total = tk.Label(frame2, text="Total a pagar: MXN 0", bg="#C6D9E3", font="sans 25 bold")
+        self.label_suma_total = tk.Label(frame2, text="Total a pagar: MXN 0", bg="#FDC32F", font="sans 25 bold")
         self.label_suma_total.place(x=360, y=420)
 
-        lblframe1 = LabelFrame(frame2, text="Opciones", bg="#C6D9E3", font="sans 12 bold")
+        lblframe1 = LabelFrame(frame2, text="Opciones", bg="#DE2924", font="sans 12 bold")
         lblframe1.place(x=10, y=340, width=1060, height=70)
 
-        boton_agregar = tk.Button(lblframe1, text="Agregar Artículo", bg="#C6D9E3", font="sans 12 bold", command=self.registrar)
+        boton_agregar = tk.Button(lblframe1, text="Agregar Artículo", bg="#DE2924", font="sans 12 bold", command=self.registrar)
         boton_agregar.place(x=50, y=1, width=240, height=40)
 
-        boton_pagar = tk.Button(lblframe1, text="Realizar Pago", bg="#C6D9E3", font="sans 12 bold", command=self.abrir_ventana_pago)
+        boton_pagar = tk.Button(lblframe1, text="Realizar Pago", bg="#DE2924", font="sans 12 bold", command=self.abrir_ventana_pago)
         boton_pagar.place(x=400, y=1, width=240, height=40)
 
-        boton_ver_facturas = tk.Button(lblframe1, text="Ver Facturas", bg="#dddddd", font="sans 12", command=self.abrir_ventana_factura)
+        boton_ver_facturas = tk.Button(lblframe1, text="Ver Facturas", bg="#DE2924", font="sans 12", command=self.abrir_ventana_factura)
         boton_ver_facturas.place(x=750, y=1, width=240, height=40)
 
     # Carga los nombres de los productos para el combobox
@@ -200,12 +200,12 @@ class Ventas(tk.Frame):
         ventana_pago = Toplevel(self)
         ventana_pago.title("Procesar Pago")
         ventana_pago.geometry("300x200")
-        ventana_pago.config(bg="#C6D9E3")
+        ventana_pago.config(bg="#FDC32F")
 
-        lbl_total = Label(ventana_pago, text=self.label_suma_total.cget("text"), bg="#C6D9E3", font="sans 12 bold")
+        lbl_total = Label(ventana_pago, text=self.label_suma_total.cget("text"), bg="#FDC32F", font="sans 12 bold")
         lbl_total.pack(pady=10)
 
-        lbl_pago = Label(ventana_pago, text="Pago recibido:", bg="#C6D9E3", font="sans 12 bold")
+        lbl_pago = Label(ventana_pago, text="Pago recibido:", bg="#FDC32F", font="sans 12 bold")
         lbl_pago.pack(pady=5)
         entry_pago = Entry(ventana_pago, font="sans 12 bold")
         entry_pago.pack(pady=5)
@@ -266,9 +266,9 @@ class Ventas(tk.Frame):
         ventana_facturas = Toplevel(self)
         ventana_facturas.title("Facturas")
         ventana_facturas.geometry("600x400")
-        ventana_facturas.config(bg="#C6D9E3")
+        ventana_facturas.config(bg="#FDC32F")
 
-        treFrame = tk.Frame(ventana_facturas, bg="#C6D9E3")
+        treFrame = tk.Frame(ventana_facturas, bg="#FDC32F")
         treFrame.pack(fill=BOTH, expand=True, padx=10, pady=10)
 
         scrol_y = ttk.Scrollbar(treFrame, orient=VERTICAL)

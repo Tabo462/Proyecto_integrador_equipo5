@@ -28,39 +28,39 @@ class Inventario(tk.Frame):
         titulo.place(x=5, y=0, width=1090, height=90)
 
         # Área principal donde van los formularios y la tabla
-        frame2 = tk.Frame(self, bg="#C6D9E3", highlightbackground="gray", highlightthickness=1)
+        frame2 = tk.Frame(self, bg="#FDC32F", highlightbackground="gray", highlightthickness=1)
         frame2.place(x=0, y=100, width=1100, height=550)
 
         # Sección para ingresar datos de productos
-        labelframe = LabelFrame(frame2, text="Productos", font="sans 22 bold", bg="#C6D9E3")
+        labelframe = LabelFrame(frame2, text="Productos", font="sans 22 bold", bg="#FDC32F")
         labelframe.place(x=20, y=30, width=400, height=500)
 
         # Campo para el nombre del producto
-        lblnombre = Label(labelframe, text="Nombre: ", font="sans 14 bold", bg="#C6D9E3")
+        lblnombre = Label(labelframe, text="Nombre: ", font="sans 14 bold", bg="#FDC32F")
         lblnombre.place(x=10, y=20)
         self.nombre = ttk.Entry(labelframe, font="sans 14 bold")
         self.nombre.place(x=140, y=20, width=240, height=40)
 
         # Campo para el proveedor
-        lblproveedor = Label(labelframe, text="Proovedor: ", font="sans 14 bold", bg="#C6D9E3")
+        lblproveedor = Label(labelframe, text="Proovedor: ", font="sans 14 bold", bg="#FDC32F")
         lblproveedor.place(x=10, y=80)
         self.proveedor = ttk.Entry(labelframe, font="sans 14 bold")
         self.proveedor.place(x=140, y=80, width=240, height=40)
 
         # Campo para el precio
-        lblprecio = Label(labelframe, text="Precio: ", font="sans 14 bold", bg="#C6D9E3")
+        lblprecio = Label(labelframe, text="Precio: ", font="sans 14 bold", bg="#FDC32F")
         lblprecio.place(x=10, y=140)
         self.precio = ttk.Entry(labelframe, font="sans 14 bold")
         self.precio.place(x=140, y=140, width=240, height=40)
 
         # Campo para el costo
-        lblcosto = Label(labelframe, text="Costo: ", font="sans 14 bold", bg="#C6D9E3")
+        lblcosto = Label(labelframe, text="Costo: ", font="sans 14 bold", bg="#FDC32F")
         lblcosto.place(x=10, y=200)
         self.costo = ttk.Entry(labelframe, font="sans 14 bold")
         self.costo.place(x=140, y=200, width=240, height=40)
 
         # Campo para el stock disponible
-        lblstock = Label(labelframe, text="Stock: ", font="sans 14 bold", bg="#C6D9E3")
+        lblstock = Label(labelframe, text="Stock: ", font="sans 14 bold", bg="#FDC32F")
         lblstock.place(x=10, y=260)
         self.stock = ttk.Entry(labelframe, font="sans 14 bold")
         self.stock.place(x=140, y=260, width=240, height=40)

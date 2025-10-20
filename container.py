@@ -14,14 +14,14 @@ class Container(tk.Frame):
         self.controlador = controlador
         self.pack()
         self.place(x=0, y=0, width=800, height=400)
-        self.config(bg= "#C6D9E3")
+        self.config(bg= "#FDC32F")
         self.widgets()
 
     # Función para mostrar distintas ventanas top levels (ventas, inventario) en el manager
     def show_frames(self, container):
         top_level = tk.Toplevel(self)
         frame = container(top_level)
-        frame.config(bg="#C6D9E3")
+        frame.config(bg="#FDC32F")
         frame.pack(fill="both", expand = True)
         top_level.geometry("1100x650+120+20")
         top_level.resizable(False, False)
@@ -38,20 +38,20 @@ class Container(tk.Frame):
         self.show_frames(Inventario)
 
     def widgets(self):
-        frame1 = tk.Frame(self, bg="#C6D9E3")
+        frame1 = tk.Frame(self, bg="#FDC32F")
         frame1.pack()
         frame1.place(x=0, y=0, width=800, height=400)
 
-        btnventas = Button(frame1, bg="#90D5FF", fg="black", font= "sans 18 bold", text="Ir a Ventas", command=self.ventas)
+        btnventas = Button(frame1, bg="#DE2924", fg="black", font= "sans 18 bold", text="Ir a Ventas", command=self.ventas)
         btnventas.place(x=500, y=30, width=240, height=60)
 
-        btninventario = Button(frame1, bg="#8c8c8c", fg="white", font = "sans 18 bold", text="Ir a Inventario", command=self.inventario)
+        btninventario = Button(frame1, bg="#DE2924", fg="white", font = "sans 18 bold", text="Ir a Inventario", command=self.inventario)
         btninventario.place(x=500, y=130, width=240, height=60)
 
         self.logo_image = Image.open("./images/logo.png") 
         self.logo_image = self.logo_image.resize((280,280))
         self.logo_image = ImageTk.PhotoImage(self.logo_image)
-        self.logo_label = tk.Label(frame1, image=self.logo_image, bg="#C6D9E3")
+        self.logo_label = tk.Label(frame1, image=self.logo_image, bg="#FDC32F")
         self.logo_label.place(x=100, y=30)
 
         copyright_label = tk.Label(frame1, text="© 2025 CODEX Code. Todos los derechos reservados", font="sans 12 bold", bg="#C6D9E3", fg="gray")
