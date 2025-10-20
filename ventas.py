@@ -36,7 +36,7 @@ class Ventas(tk.Frame):
         self.entry_numero_factura.place(x=100, y=5, width=80)
 
         label_nombre = tk.Label(lblframe, text="Productos: ", bg="#FDC32F", font="sans 12 bold")
-        label_nombre.place(x=200, y=12)
+        label_nombre.place(x=185, y=12)
         self.entry_nombre = ttk.Combobox(lblframe, font='sans 12 bold', state="readonly")
         self.entry_nombre.place(x=280, y=10, width=180)
 
@@ -92,7 +92,7 @@ class Ventas(tk.Frame):
         boton_pagar = tk.Button(lblframe1, text="Realizar Pago", bg="#DE2924", font="sans 12 bold", command=self.abrir_ventana_pago)
         boton_pagar.place(x=400, y=1, width=240, height=40)
 
-        boton_ver_facturas = tk.Button(lblframe1, text="Ver Facturas", bg="#DE2924", font="sans 12", command=self.abrir_ventana_factura)
+        boton_ver_facturas = tk.Button(lblframe1, text="Ver Facturas", bg="#DE2924", font="sans 12 bold", command=self.abrir_ventana_factura)
         boton_ver_facturas.place(x=750, y=1, width=240, height=40)
 
     # Carga los nombres de los productos para el combobox
