@@ -42,7 +42,7 @@ class Container(tk.Frame):
         frame1.pack()
         frame1.place(x=0, y=0, width=800, height=400)
 
-        btnventas = Button(frame1, bg="#DE2924", fg="black", font= "sans 18 bold", text="Ir a Ventas", command=self.ventas)
+        btnventas = Button(frame1, bg="#DE2924", fg="white", font= "sans 18 bold", text="Ir a Ventas", command=self.ventas)
         btnventas.place(x=500, y=30, width=240, height=60)
 
         btninventario = Button(frame1, bg="#DE2924", fg="white", font = "sans 18 bold", text="Ir a Inventario", command=self.inventario)
@@ -54,7 +54,7 @@ class Container(tk.Frame):
         self.logo_label = tk.Label(frame1, image=self.logo_image, bg="#FDC32F")
         self.logo_label.place(x=100, y=30)
 
-        copyright_label = tk.Label(frame1, text="© 2025 CODEX Code. Todos los derechos reservados", font="sans 12 bold", bg="#C6D9E3", fg="gray")
+        copyright_label = tk.Label(frame1, text="© 2025 CODEX Code. Todos los derechos reservados", font="sans 12 bold", bg="#FDC32F", fg="gray")
         copyright_label.place(x=180, y=350)
         
 
